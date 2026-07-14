@@ -1,29 +1,22 @@
 import cv2
 
 # Open webcam
-camera = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0)
 
-if not camera.isOpened():
-    print("Could not open webcam.")
-else:
-    print("Webcam started successfully.")
-    print("Press 'Q' to quit.")
+while True:
+    ret, frame = cam.read()
 
-    while True:
-        success, frame = camera.read()
+    if ret == False:
+        break
 
-        if not success:
-            print("Failed to capture frame.")
-            break
+    # Show webcam
+    cv2.imshow("Webcam", frame)
 
-        # Display webcam
-        cv2.imshow("Webcam Capture", frame)
+    # Press q to close
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-        # Press Q to exit
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+cam.release()
+cv2.destroyAllWindows()
 
-    camera.release()
-    cv2.destroyAllWindows()
-
-    print("Webcam closed successfully.")
+print("Webcam closed")

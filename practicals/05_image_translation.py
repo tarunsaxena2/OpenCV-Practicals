@@ -1,34 +1,31 @@
 import cv2
 import numpy as np
-import os
 
 # Read image
-image = cv2.imread("images/sample.jpg")
+img = cv2.imread("images/sample.jpg")
 
-if image is None:
-    print("Image not found.")
-else:
-    rows, cols = image.shape[:2]
+# Image size
+rows, cols = img.shape[:2]
 
-    # Translation Matrix
-    tx = 100  # Shift right
-    ty = 50   # Shift down
+# Translation values
+tx = 80
+ty = 50
 
-    translation_matrix = np.float32([
-        [1, 0, tx],
-        [0, 1, ty]
-    ])
+# Translation matrix
+matrix = np.float32([[1, 0, tx],
+                     [0, 1, ty]])
 
-    translated = cv2.warpAffine(image, translation_matrix, (cols, rows))
+# Translate image
+result = cv2.warpAffine(img, matrix, (cols, rows))
 
-    os.makedirs("outputs", exist_ok=True)
-    cv2.imwrite("outputs/translated_image.jpg", translated)
+# Show images
+cv2.imshow("Original", img)
+cv2.imshow("Translated", result)
 
-    cv2.imshow("Original Image", image)
-    cv2.imshow("Translated Image", translated)
+# Save image
+cv2.imwrite("outputs/translated.jpg", result)
 
-    print("Image translated successfully.")
-    print("Output saved in outputs/translated_image.jpg")
+print("Translation done")
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()

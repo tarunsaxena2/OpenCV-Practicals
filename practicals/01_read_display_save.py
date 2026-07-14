@@ -1,28 +1,15 @@
 import cv2
-import os
 
-# Image path
-image_path = "images/sample.jpg"
+# image ko read karna
+img = cv2.imread("images/sample.jpg")
 
-# Read image
-image = cv2.imread(image_path)
+# image ko display karna
+cv2.imshow("My Image", img)
 
-# Check image
-if image is None:
-    print("Image not found. Please check the image path.")
-else:
-    # Display image
-    cv2.imshow("Original Image", image)
+# image ki copy save karna
+cv2.imwrite("outputs/saved_image.jpg", img)
 
-    # Create output folder if it does not exist
-    os.makedirs("outputs", exist_ok=True)
+print("Image saved successfully")
 
-    # Save image
-    output_path = "outputs/saved_image.jpg"
-    cv2.imwrite(output_path, image)
-
-    print("Image displayed successfully.")
-    print("Image saved at:", output_path)
-
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()

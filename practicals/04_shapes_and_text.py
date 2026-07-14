@@ -1,41 +1,32 @@
 import cv2
-import os
 
-image = cv2.imread("images/sample.jpg")
+# Read image
+img = cv2.imread("images/sample.jpg")
 
-if image is None:
-    print("Image not found.")
-else:
-    output = image.copy()
+# Copy image
+new_img = img.copy()
 
-    # Draw a line
-    cv2.line(output, (50, 50), (300, 50), (255, 0, 0), 4)
+# Draw line
+cv2.line(new_img, (40, 40), (250, 40), (255, 0, 0), 3)
 
-    # Draw a rectangle
-    cv2.rectangle(output, (50, 100), (300, 250), (0, 255, 0), 4)
+# Draw rectangle
+cv2.rectangle(new_img, (50, 80), (250, 220), (0, 255, 0), 3)
 
-    # Draw a circle
-    cv2.circle(output, (450, 170), 70, (0, 0, 255), 4)
+# Draw circle
+cv2.circle(new_img, (400, 150), 50, (0, 0, 255), 3)
 
-    # Add text
-    cv2.putText(
-        output,
-        "OpenCV Practical",
-        (50, 320),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        1,
-        (255, 255, 255),
-        2
-    )
+# Add text
+cv2.putText(new_img, "Tarun Saxena", (50, 300),
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
-    os.makedirs("outputs", exist_ok=True)
-    cv2.imwrite("outputs/shapes_and_text.jpg", output)
+# Show images
+cv2.imshow("Original", img)
+cv2.imshow("Output", new_img)
 
-    cv2.imshow("Original Image", image)
-    cv2.imshow("Shapes and Text", output)
+# Save image
+cv2.imwrite("outputs/shapes_text.jpg", new_img)
 
-    print("Shapes and text added successfully.")
-    print("Output saved in outputs/shapes_and_text.jpg")
+print("Shapes added")
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()

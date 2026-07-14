@@ -1,30 +1,22 @@
 import cv2
-import os
 
 # Read image
-image = cv2.imread("images/sample.jpg")
+img = cv2.imread("images/sample.jpg")
 
-if image is None:
-    print("Image not found.")
-else:
-    # Convert to grayscale
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert to gray
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Apply Canny Edge Detection
-    edges = cv2.Canny(gray, 100, 200)
+# Detect edges
+edge = cv2.Canny(gray, 100, 200)
 
-    # Create output folder
-    os.makedirs("outputs", exist_ok=True)
+# Show images
+cv2.imshow("Original", img)
+cv2.imshow("Edges", edge)
 
-    # Save output
-    cv2.imwrite("outputs/canny_edges.jpg", edges)
+# Save output
+cv2.imwrite("outputs/canny.jpg", edge)
 
-    # Display images
-    cv2.imshow("Original Image", image)
-    cv2.imshow("Canny Edge Detection", edges)
+print("Edge detection done")
 
-    print("Canny Edge Detection completed successfully.")
-    print("Output saved in outputs/canny_edges.jpg")
-
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()

@@ -1,37 +1,30 @@
 import cv2
-import os
 
 # Read image
-image = cv2.imread("images/sample.jpg")
+img = cv2.imread("images/sample.jpg")
 
-if image is None:
-    print("Image not found.")
-else:
-    # Convert to grayscale
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert to gray
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Create kernel
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (15, 15))
+# Create kernel
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (15, 15))
 
-    # Morphological operations
-    top_hat = cv2.morphologyEx(gray, cv2.MORPH_TOPHAT, kernel)
-    black_hat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, kernel)
+# Apply Top Hat
+tophat = cv2.morphologyEx(gray, cv2.MORPH_TOPHAT, kernel)
 
-    # Create output folder
-    os.makedirs("outputs", exist_ok=True)
+# Apply Black Hat
+blackhat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, kernel)
 
-    # Save output images
-    cv2.imwrite("outputs/top_hat.jpg", top_hat)
-    cv2.imwrite("outputs/black_hat.jpg", black_hat)
+# Show images
+cv2.imshow("Original", img)
+cv2.imshow("Top Hat", tophat)
+cv2.imshow("Black Hat", blackhat)
 
-    # Display images
-    cv2.imshow("Original Image", image)
-    cv2.imshow("Top Hat", top_hat)
-    cv2.imshow("Black Hat", black_hat)
+# Save output
+cv2.imwrite("outputs/tophat.jpg", tophat)
+cv2.imwrite("outputs/blackhat.jpg", blackhat)
 
-    print("Morphological operations completed successfully.")
-    print("Top Hat image saved as outputs/top_hat.jpg")
-    print("Black Hat image saved as outputs/black_hat.jpg")
+print("Morphology completed")
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()

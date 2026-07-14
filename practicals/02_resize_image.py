@@ -1,21 +1,19 @@
 import cv2
-import os
 
-image = cv2.imread("images/sample.jpg")
+# Read image
+img = cv2.imread("images/sample.jpg")
 
-if image is None:
-    print("Image not found.")
-else:
-    resized_image = cv2.resize(image, (500, 300))
+# Resize image
+resize = cv2.resize(img, (500, 300))
 
-    os.makedirs("outputs", exist_ok=True)
-    cv2.imwrite("outputs/resized_image.jpg", resized_image)
+# Show images
+cv2.imshow("Original Image", img)
+cv2.imshow("Resized Image", resize)
 
-    cv2.imshow("Original Image", image)
-    cv2.imshow("Resized Image", resized_image)
+# Save resized image
+cv2.imwrite("outputs/resized_image.jpg", resize)
 
-    print("Image resized successfully.")
-    print("Resized image saved in outputs folder.")
+print("Resize completed")
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()
